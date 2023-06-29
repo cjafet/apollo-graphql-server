@@ -1,0 +1,59 @@
+input Item {
+    _id: ID
+    description: String!
+    likes: Int
+    type: String!
+    action: String
+}
+
+input inputTeam {
+    productGroup: String!
+    productTeam: String!
+}
+
+input Retrospective {
+    kudos: [Item]
+    improvements: [Item]
+    actionItems: [Item]
+    lastActionItems: [Item]
+    ownedBy: inputTeam!
+    iteration: Int!
+}
+
+type Team {
+    productGroup: String!
+    productTeam: String!
+    retrospectives: [Retros]
+}
+
+type RetroItem {
+    description: String!
+    likes: Int
+    type: String!
+    action: String
+}
+
+type Retros {
+    _id: ID!
+    kudos: [RetroItem]
+    improvements: [RetroItem]
+    actionItems: [RetroItem]
+    lastActionItems: [RetroItem]
+    ownedBy: Team
+    iteration: Int!
+}
+
+type Query {
+    totalRetros: Int!
+    retrospectives: [Retros]
+    allRetrosByTeam(productTeam: String!): [Retros]
+    allTeams: [String]   
+    retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros   
+}
+
+type Mutation {
+    postRetro(input: Retrospective!): Retros!
+    postItem(input: Item!): RetroItem
+    deleteItem(_id: ID!, desc: String!, type: String!): String
+    addItemLike(_id: ID!, desc: String!, type: String!): String
+}
