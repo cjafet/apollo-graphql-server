@@ -58,15 +58,18 @@ module.exports = {
     },
     addItemLike(parent, args, { db }) {
         console.log(args);
+        const itemId = args.itemId;
         const itemType = args.type;
         const itemDesc = args.desc;
-        console.log(itemType, itemDesc);  
+        console.log(itemType, itemDesc);
+        const _itemId = `${args.type}.itemId`;  
         const _type = `${args.type}.description`;
         const _like = `${args.type}.$.likes`;
 
         db.collection("retro").findOneAndUpdate(
             {
                 _id: new ObjectId(args._id), 
+                [_itemId]: itemId,
                 [_type]: itemDesc
             }, 
             { $inc: { [_like] : 1 } } 

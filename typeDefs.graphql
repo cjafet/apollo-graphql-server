@@ -56,5 +56,5 @@ type Mutation {
     postRetro(input: Retrospective!): Retros!
     postItem(input: Item!): RetroItem
     deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
-    addItemLike(_id: ID!, desc: String!, type: String!): String
+    addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
 }
