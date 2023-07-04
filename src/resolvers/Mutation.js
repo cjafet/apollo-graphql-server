@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb');
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
 
@@ -15,10 +16,12 @@ module.exports = {
         console.log(args);
         let obj = {};
         obj[args.input.type] = {
+            itemId: uuidv4(),
             description: args.input.description,
             likes:0,
             type: args.input.type
         }
+        console.log(obj);
         db.collection('retro').updateOne(
             {
                 _id: new ObjectId(args.input._id)
@@ -31,6 +34,7 @@ module.exports = {
     },
     deleteItem(parent, args, { db }) {
         console.log(args);
+        const itemId = args.itemId;
         const itemType = args.type;
         const itemDesc = args.desc;
         console.log(itemType);  
@@ -40,6 +44,7 @@ module.exports = {
             description: ""
         };
         obj[itemType].description = itemDesc;
+        obj[itemType].itemId = itemId;
         console.log("Obj: ",obj);
         db.collection('retro').updateOne(
             {
