@@ -7,7 +7,6 @@ input Item {
 }
 
 input inputTeam {
-    productGroup: String!
     productTeam: String!
 }
 
@@ -21,7 +20,6 @@ input Retrospective {
 }
 
 type Team {
-    productGroup: String!
     productTeam: String!
     retrospectives: [Retros]
 }
