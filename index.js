@@ -20,7 +20,7 @@ async function start() {
 
   const server = new ApolloServer({ typeDefs, resolvers, context })
 
-  server.listen().then(({url}) => console.log(`GraphQL Service running on ${url}`))
+  server.listen({ port: process.env.PORT || 4000 }).then(({url}) => console.log(`GraphQL Service running on ${url}`))
 
 }
 
