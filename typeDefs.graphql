@@ -1,5 +1,6 @@
 input Item {
     _id: ID
+    itemId: ID
     description: String!
     likes: Int
     type: String!
@@ -55,4 +56,5 @@ type Mutation {
     postItem(input: Item!): RetroItem
     deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
     addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
+    moveItem(input: Item!): RetroItem
 }

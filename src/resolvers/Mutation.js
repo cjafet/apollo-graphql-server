@@ -76,6 +76,43 @@ module.exports = {
         )
 
         return args.desc;      
+    },
+    moveItem(parent, args, { db }) {
+        console.log(args);
+        const itemId = args.input.itemId;
+        const itemType = args.input.type;
+        const itemDesc = args.input.description;
+        const itemLikes = args.input.likes;
+
+        let obj = {};
+        obj[itemType] = {
+            description: ""
+        };
+        obj[itemType].description = itemDesc;
+        obj[itemType].itemId = itemId;
+        console.log("Obj: ",obj);
+
+        let toObj = {};
+        toObj["actionItems"] = {
+            description: ""
+        };
+        toObj["actionItems"].description = itemDesc;
+        toObj["actionItems"].itemId = itemId;
+        toObj["actionItems"].likes = itemLikes;
+        toObj["actionItems"].type = "actionItems";
+        console.log("Obj: ",toObj);
+
+        db.collection("retro").updateOne(
+            {
+                _id: new ObjectId(args.input._id)
+            },
+            {
+                $push: toObj,
+                $pull: obj
+            }
+        )
+
+        return args.input;
     }
 
 }
