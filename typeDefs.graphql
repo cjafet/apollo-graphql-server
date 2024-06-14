@@ -58,3 +58,8 @@ type Mutation {
     addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
     moveItem(input: Item!): RetroItem
 }
+
+type Subscription {
+  itemAdded: RetroItem
+  numberIncremented: Int
+}
