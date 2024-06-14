@@ -1,6 +1,7 @@
 const { ObjectId } = require('mongodb');
 const fetch = require('node-fetch');
 const { v4: uuidv4 } = require('uuid');
+const { PubSub } = require('graphql-subscriptions');
 
 module.exports = {
 
@@ -15,8 +16,9 @@ module.exports = {
     postItem(parent, args, { db }) {
         console.log(args);
         let obj = {};
+        const ID = uuidv4();
         obj[args.input.type] = {
-            itemId: uuidv4(),
+            itemId: ID,
             description: args.input.description,
             likes:0,
             type: args.input.type
@@ -100,7 +102,7 @@ module.exports = {
         toObj["actionItems"].itemId = itemId;
         toObj["actionItems"].likes = itemLikes;
         toObj["actionItems"].type = "actionItems";
-        console.log("Obj: ",toObj);
+        console.log("toObj: ",toObj);
 
         db.collection("retro").updateOne(
             {
