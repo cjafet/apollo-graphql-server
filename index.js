@@ -57,15 +57,11 @@ const serverCleanup = useServer({ schema }, wsServer);
 const server = new ApolloServer({
   schema,
   context,
-  csrfPrevention: false, // see below for more about this
+  csrfPrevention: false,  // see below for more about this
   cors: {
-    origin: [
-      "http://graphql-5a92c0ee750b.herokuapp.com",
-      "https://studio.apollographql.com",
-      "https://sandbox.embed.apollographql.com/sandbox/explorer",
-    ],
-    credentials: false,
-  },
+    "origin": ['http://localhost:4000', 'https://studio.apollographql.com', 'https://sandbox.embed.apollographql.com/sandbox/explorer'],
+    "credentials": false
+  }, 
   plugins: [
     // Proper shutdown for the HTTP server.
     ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -93,10 +89,10 @@ const PORT = 4000;
 httpServer.listen(PORT, () => {
   // console.log(`Server is now running on http://localhost:${PORT}${server.graphqlPath}`);
   console.log(
-    `🚀 Query endpoint ready at http://graphql-5a92c0ee750b.herokuapp.com${server.graphqlPath}`
+    `🚀 Query endpoint ready at http://localhost:${PORT}${server.graphqlPath}`
   );
   console.log(
-    `🚀 Subscription endpoint ready at ws://graphql-5a92c0ee750b.herokuapp.com${server.graphqlPath}`
+    `🚀 Subscription endpoint ready at ws://localhost:${PORT}${server.graphqlPath}`
   );
 });
 
