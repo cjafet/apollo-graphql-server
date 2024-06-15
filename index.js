@@ -37,7 +37,7 @@ async function start() {
 // Create our WebSocket server using the HTTP server we just set up.
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: "/subscriptions",
 });
 
 wsServer.on('connection', function connection(ws) {
@@ -88,7 +88,7 @@ server.applyMiddleware({ app });
 
 // httpServer.listen({ port: process.env.PORT || 4000 }).then(({url}) => console.log(`GraphQL Service running on ${url}`))
 // binding to heroku dynamically assigned port
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 httpServer.listen(PORT, () => {
   // console.log(`Server is now running on http://localhost:${PORT}${server.graphqlPath}`);
   console.log(
