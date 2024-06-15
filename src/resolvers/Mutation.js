@@ -33,7 +33,11 @@ module.exports = {
         $push: obj,
       }
     );
-    pubsub.publish("ITEM_CREATED", { itemAdded: args });
+    
+    pubsub.publish("ITEM_CREATED", { itemAdded: args })
+    .then(() => console.log("Worked"))
+    .catch(err => console.log(err));
+    
     return args.input;
   },
   deleteItem(parent, args, { db }) {
