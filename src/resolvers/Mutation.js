@@ -1,9 +1,6 @@
 const { ObjectId } = require("mongodb");
 const fetch = require("node-fetch");
 const { v4: uuidv4 } = require("uuid");
-const { PubSub } = require("graphql-subscriptions");
-
-// const pubsub = new PubSub();
 
 module.exports = {
   postRetro(parent, args, { db }) {
@@ -34,10 +31,11 @@ module.exports = {
       }
     );
 
-    pubsub.publish("ITEM_CREATED", { itemAdded: args })
-    .then(() => console.log("Worked"))
-    .catch(err => console.log(err));
-    
+    pubsub
+      .publish("ITEM_CREATED", { itemAdded: args })
+      .then(() => console.log("Worked"))
+      .catch((err) => console.log(err));
+
     return args.input;
   },
   deleteItem(parent, args, { db }) {
