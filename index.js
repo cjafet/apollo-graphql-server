@@ -80,6 +80,8 @@ const server = new ApolloServer({
   ],
 });
 await server.start();
+// app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), expressMiddleware(server));
+
 
 server.applyMiddleware({ app });
   
