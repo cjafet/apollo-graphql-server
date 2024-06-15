@@ -56,6 +56,7 @@ const serverCleanup = useServer({ schema }, wsServer);
 // Set up ApolloServer.
 const server = new ApolloServer({
   schema,
+  introspection: 'stage',
   context,
   csrfPrevention: false,  // see below for more about this
   cors: {
