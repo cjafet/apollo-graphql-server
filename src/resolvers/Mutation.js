@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 const { v4: uuidv4 } = require("uuid");
 const { PubSub } = require("graphql-subscriptions");
 
-const pubsub = new PubSub();
+// const pubsub = new PubSub();
 
 module.exports = {
   postRetro(parent, args, { db }) {
@@ -14,7 +14,7 @@ module.exports = {
     db.collection("retro").insertOne(retrospective);
     return retrospective;
   },
-  postItem(parent, args, { db }) {
+  postItem(parent, args, { db, pubsub }) {
     console.log(args);
     let obj = {};
     const ID = uuidv4();
@@ -33,7 +33,7 @@ module.exports = {
         $push: obj,
       }
     );
-    
+
     pubsub.publish("ITEM_CREATED", { itemAdded: args })
     .then(() => console.log("Worked"))
     .catch(err => console.log(err));
