@@ -16,6 +16,7 @@ const cors = require("cors");
 const { json } = require("body-parser");
 const { SubscriptionServer } = require("subscriptions-transport-ws");
 const { execute, subscribe } = require("graphql");
+const { createServer: createViteServer } = require("vite")
 
 require("dotenv").config();
 const pubsub = new PubSub();
@@ -79,7 +80,7 @@ async function start() {
           return {
             async drainServer() {
               // await serverCleanup.dispose();
-              subscriptionServer.close();
+              // subscriptionServer.close();
             },
           };
         },
@@ -120,6 +121,13 @@ async function start() {
   );
 
   await server.start();
+
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: "custom",
+  });
+
+  app.use(vite.middlewares);
 
   server.applyMiddleware({ app });
 
