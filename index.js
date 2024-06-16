@@ -37,7 +37,7 @@ async function start() {
   // Create our WebSocket server using the HTTP server we just set up.
   const wsServer = new WebSocketServer({
     server: httpServer,
-    path: "/subscriptions",
+    path: "/graphql",
   });
 
   wsServer.on("connection", function connection(ws) {
