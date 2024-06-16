@@ -61,5 +61,4 @@ type Mutation {
 
 type Subscription {
   itemAdded: RetroItem
-  numberIncremented: Int
 }

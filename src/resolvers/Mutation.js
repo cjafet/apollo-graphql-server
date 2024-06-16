@@ -32,13 +32,8 @@ module.exports = {
     );
 
     pubsub
-      .publish("ITEM_CREATED", {
-        itemAdded: {
-          description: args.description,
-          likes: args.likes,
-          action: args.action,
-          type: args.type,
-        },
+      .publish("ITEM_ADDED", {
+        itemAdded: args.input
       })
       .then(() => console.log("Worked"))
       .catch((err) => console.log(err));
