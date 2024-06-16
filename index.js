@@ -63,7 +63,7 @@ async function start() {
     csrfPrevention: false, // see below for more about this
     cors: {
       origin: [
-        "http://localhost:4000",
+        "https://graphql-5a92c0ee750b.herokuapp.com",
         "https://studio.apollographql.com",
         "https://sandbox.embed.apollographql.com/sandbox/explorer",
       ],
