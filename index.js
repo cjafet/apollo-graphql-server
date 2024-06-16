@@ -8,6 +8,7 @@ const { WebSocketServer } = require("ws");
 const { useServer } = require("graphql-ws/lib/use/ws");
 const { PubSub } = require("graphql-subscriptions");
 const express = require("express");
+const cors = require("cors");
 const {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
@@ -103,6 +104,8 @@ async function start() {
   });
 
   app.use(vite.middlewares);
+
+  app.use(cors());
 
   server.applyMiddleware({ app });
 
