@@ -5,7 +5,7 @@ const resolvers = require("./src/resolvers");
 const { createServer } = require("http");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { WebSocketServer } = require("ws");
-const { useServer } = require("graphql-ws/lib/use/ws");
+// const { useServer } = require("graphql-ws/lib/use/ws");
 const { PubSub } = require("graphql-subscriptions");
 const express = require("express");
 const {
@@ -51,7 +51,7 @@ async function start() {
   });
 
   // Save the returned server's info so we can shutdown this server later
-  const serverCleanup = useServer({ schema }, wsServer);
+  // const serverCleanup = useServer({ schema }, wsServer);
 
   let subscriptionServer;
 
@@ -78,7 +78,7 @@ async function start() {
         async serverWillStart() {
           return {
             async drainServer() {
-              await serverCleanup.dispose();
+              // await serverCleanup.dispose();
               subscriptionServer.close();
             },
           };
