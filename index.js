@@ -14,6 +14,8 @@ const {
 } = require("apollo-server-core");
 const cors = require("cors");
 const { json } = require("body-parser");
+const { SubscriptionServer } = require("subscriptions-transport-ws");
+const { execute, subscribe } = require("graphql");
 
 require("dotenv").config();
 const pubsub = new PubSub();
@@ -26,7 +28,6 @@ async function start() {
   const client = await MongoClient.connect(MONGO_DB, { useNewUrlParser: true });
 
   const db = client.db();
-  // const pubsub = PubSub();
   const context = { db, pubsub };
 
   const schema = makeExecutableSchema({ typeDefs, resolvers });
@@ -52,6 +53,8 @@ async function start() {
   // Save the returned server's info so we can shutdown this server later
   const serverCleanup = useServer({ schema }, wsServer);
 
+  let subscriptionServer;
+
   // Set up ApolloServer.
   const server = new ApolloServer({
     schema,
@@ -76,6 +79,7 @@ async function start() {
           return {
             async drainServer() {
               await serverCleanup.dispose();
+              subscriptionServer.close();
             },
           };
         },
@@ -84,6 +88,37 @@ async function start() {
     ],
     // fieldResolver: defaultResolver,
   });
+
+  subscriptionServer = SubscriptionServer.create(
+    {
+      // This is the `schema` we just created.
+      schema,
+      // These are imported from `graphql`.
+      execute,
+      subscribe,
+      // This `server` is the instance returned from `new ApolloServer`.
+      // Ensures the same graphql validation rules are applied to both the Subscription Server and the ApolloServer
+      validationRules: server.requestOptions.validationRules,
+      // Providing `onConnect` is the `SubscriptionServer` equivalent to the
+      // `context` function in `ApolloServer`. Please [see the docs](https://github.com/apollographql/subscriptions-transport-ws#constructoroptions-socketoptions--socketserver)
+      // for more information on this hook.
+      // async onConnect(
+      //   connectionParams: Object,
+      //   webSocket: WebSocket,
+      //   context: ConnectionContext
+      // ) {
+      //   // If an object is returned here, it will be passed as the `context`
+      //   // argument to your subscription resolvers.
+      // }
+    },
+    {
+      // This is the `httpServer` we created in a previous step.
+      server: httpServer,
+      // This `server` is the instance returned from `new ApolloServer`.
+      path: server.graphqlPath,
+    }
+  );
+
   await server.start();
 
   server.applyMiddleware({ app });

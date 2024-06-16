@@ -24,6 +24,7 @@
     "graphql-ws": "^5.14.0",
     "mongodb": "^5.5.0",
     "nodemon": "^2.0.22",
+    "subscriptions-transport-ws": "^0.11.0",
     "uuid": "^9.0.0",
     "ws": "^8.13.0"
   }
