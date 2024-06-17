@@ -33,7 +33,12 @@ module.exports = {
 
     pubsub
       .publish("ITEM_ADDED", {
-        itemAdded: args.input
+        itemAdded: {
+          itemId: ID,
+          description: args.input.description,
+          likes: 0,
+          type: args.input.type,
+        },
       })
       .then(() => console.log("Worked"))
       .catch((err) => console.log(err));

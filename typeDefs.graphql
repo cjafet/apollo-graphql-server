@@ -1,64 +1,64 @@
 input Item {
-    _id: ID
-    itemId: ID
-    description: String!
-    likes: Int
-    type: String!
-    action: String
+  _id: ID
+  itemId: ID
+  description: String!
+  likes: Int
+  type: String!
+  action: String
 }
 
 input inputTeam {
-    productTeam: String!
+  productTeam: String!
 }
 
 input Retrospective {
-    kudos: [Item]
-    improvements: [Item]
-    actionItems: [Item]
-    lastActionItems: [Item]
-    ownedBy: inputTeam!
-    iteration: Int!
+  kudos: [Item]
+  improvements: [Item]
+  actionItems: [Item]
+  lastActionItems: [Item]
+  ownedBy: inputTeam!
+  iteration: Int!
 }
 
 type Team {
-    productTeam: String!
-    retrospectives: [Retros]
+  productTeam: String!
+  retrospectives: [Retros]
 }
 
 type RetroItem {
-    itemId: ID
-    description: String!
-    likes: Int
-    type: String!
-    action: String
+  itemId: ID
+  description: String!
+  likes: Int
+  type: String!
+  action: String
 }
 
 type Retros {
-    _id: ID!
-    kudos: [RetroItem]
-    improvements: [RetroItem]
-    actionItems: [RetroItem]
-    lastActionItems: [RetroItem]
-    ownedBy: Team
-    iteration: Int!
+  _id: ID!
+  kudos: [RetroItem]
+  improvements: [RetroItem]
+  actionItems: [RetroItem]
+  lastActionItems: [RetroItem]
+  ownedBy: Team
+  iteration: Int!
 }
 
 type Query {
-    totalRetros: Int!
-    retrospectives: [Retros]
-    allRetrosByTeam(productTeam: String!): [Retros]
-    allTeams: [String]   
-    retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros   
+  totalRetros: Int!
+  retrospectives: [Retros]
+  allRetrosByTeam(productTeam: String!): [Retros]
+  allTeams: [String]
+  retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
 }
 
 type Mutation {
-    postRetro(input: Retrospective!): Retros!
-    postItem(input: Item!): RetroItem
-    deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
-    addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
-    moveItem(input: Item!): RetroItem
+  postRetro(input: Retrospective!): Retros!
+  postItem(input: Item!): RetroItem
+  deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
+  addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
+  moveItem(input: Item!): RetroItem
 }
 
 type Subscription {
-  itemAdded: RetroItem
+  itemAdded(input: Item): RetroItem
 }
