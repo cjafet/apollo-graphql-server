@@ -12,6 +12,7 @@ input inputTeam {
 }
 
 input Retrospective {
+  labels: [String]
   kudos: [Item]
   improvements: [Item]
   actionItems: [Item]
@@ -35,6 +36,7 @@ type RetroItem {
 
 type Retros {
   _id: ID!
+  labels: [String]
   kudos: [RetroItem]
   improvements: [RetroItem]
   actionItems: [RetroItem]
