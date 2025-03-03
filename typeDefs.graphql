@@ -21,6 +21,34 @@ input Retrospective {
   iteration: Int!
 }
 
+input Objective {
+  _id: ID
+  year: String!
+  quarter: String!
+  title: String!
+  owner: String!
+  dueDate: String!
+  status: String!
+}
+
+type Okr {
+  year: String!
+  ownedBy: String!
+  q1: [ObjectiveItem]
+  q2: [ObjectiveItem]
+  q3: [ObjectiveItem]
+  q4: [ObjectiveItem]
+  
+}
+
+type ObjectiveItem {
+  objectId: ID!
+  title: String!
+  owner: String!
+  dueDate: String
+  status: String!
+}
+
 type Team {
   productTeam: String!
   retrospectives: [Retros]
@@ -58,7 +86,9 @@ type Mutation {
   postItem(input: Item!): RetroItem
   deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
   addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
-  moveItem(input: Item!): RetroItem
+  moveItemTo(input: Item!, moveTo: String!): RetroItem
+  postObjective(input: Objective!): ObjectiveItem!
+  postOkr(year: String!, ownedBy: String!): Okr 
 }
 
 type Subscription {

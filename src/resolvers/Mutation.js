@@ -90,7 +90,7 @@ module.exports = {
 
     return args.desc;
   },
-  moveItem(parent, args, { db }) {
+  moveItemTo(parent, args, { db }) {
     console.log(args);
     const itemId = args.input.itemId;
     const itemType = args.input.type;
@@ -106,13 +106,13 @@ module.exports = {
     console.log("Obj: ", obj);
 
     let toObj = {};
-    toObj["actionItems"] = {
+    toObj[args.moveTo] = {
       description: "",
     };
-    toObj["actionItems"].description = itemDesc;
-    toObj["actionItems"].itemId = itemId;
-    toObj["actionItems"].likes = itemLikes;
-    toObj["actionItems"].type = "actionItems";
+    toObj[args.moveTo].description = itemDesc;
+    toObj[args.moveTo].itemId = itemId;
+    toObj[args.moveTo].likes = itemLikes;
+    toObj[args.moveTo].type = args.moveTo;
     console.log("toObj: ", toObj);
 
     db.collection("retro").updateOne(
@@ -126,5 +126,53 @@ module.exports = {
     );
 
     return args.input;
+  },
+  postOkr(parent, args, { db }) {
+    console.log(args);
+    var newOkr = {
+      year: args.year,
+      ownedBy: args.ownedBy,
+      q1: [],
+      q2: [],
+      q3: [],
+      q4: []
+    };
+    db.collection("okrs").insertOne(newOkr);
+    return newOkr;
+  },
+  postObjective(parent, args, { db, pubsub }) {
+    console.log(args);
+    let obj = {};
+    const ID = uuidv4();
+    obj[args.input.quarter] = {
+      objectId: ID,
+      title: args.input.title,
+      owner: args.input.owner,
+      dueDate: args.input.dueDate,
+      status: args.input.status,
+    };
+    console.log(obj);
+    db.collection("okrs").updateOne(
+      {
+        _id: new ObjectId(args.input._id),
+      },
+      {
+        $push: obj,
+      }
+    );
+
+    // pubsub
+    //   .publish("ITEM_ADDED", {
+    //     itemAdded: {
+    //       itemId: ID,
+    //       description: args.input.description,
+    //       likes: 0,
+    //       type: args.input.type,
+    //     },
+    //   })
+    //   .then(() => console.log("Worked"))
+    //   .catch((err) => console.log(err));
+
+    return obj[args.input.quarter];
   },
 };
