@@ -73,12 +73,24 @@ type Retros {
   iteration: Int!
 }
 
+type UserData {
+  _id: ID!
+  user: User
+}
+
+type User {
+  userName: String
+  name: String
+  team: String
+}
+
 type Query {
   totalRetros: Int!
   retrospectives: [Retros]
   allRetrosByTeam(productTeam: String!): [Retros]
   allTeams: [String]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
+  user(userName: String!, password: String!): UserData
 }
 
 type Mutation {

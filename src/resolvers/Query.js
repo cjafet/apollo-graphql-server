@@ -10,6 +10,8 @@ module.exports = {
     
     allRetrosByTeam: (parent, args, { db }) => db.collection('retro').find({ 'ownedBy.productTeam': args.productTeam }).toArray(), 
     
-    retroByIterationAndTeam: (parent, args, { db }) => db.collection('retro').findOne({ 'ownedBy.productTeam': args.productTeam, 'iteration': args.iteration }) 
+    retroByIterationAndTeam: (parent, args, { db }) => db.collection('retro').findOne({ 'ownedBy.productTeam': args.productTeam, 'iteration': args.iteration }),
+    
+    user: (parent, args, { db }) => db.collection('users').findOne({ 'user.userName': args.userName, 'user.password': args.password }) 
 
 }
