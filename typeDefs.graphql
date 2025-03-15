@@ -82,12 +82,8 @@ type Retros {
   iteration: Int!
 }
 
-type UserData {
-  _id: ID!
-  user: User
-}
-
 type User {
+  _id: ID!
   email: String!
   organization: String
   userName: String!
@@ -102,7 +98,7 @@ type Query {
   allRetrosByTeam(productTeam: String!): [Retros]
   allTeams: [String]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
-  user(userName: String!, password: String!): UserData
+  user(userName: String!, password: String!): User
 }
 
 type Mutation {
@@ -113,7 +109,7 @@ type Mutation {
   moveItemTo(input: Item!, moveTo: String!): RetroItem
   postObjective(input: Objective!): ObjectiveItem!
   postOkr(year: String!, ownedBy: String!): Okr 
-  signUp(input: SignUp): User
+  signUp(input: SignUp!): User
 }
 
 type Subscription {
