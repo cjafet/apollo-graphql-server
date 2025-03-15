@@ -31,6 +31,15 @@ input Objective {
   status: String!
 }
 
+input SignUp {
+  email: String!
+  organization: String
+  userName: String!
+  password: String!
+  name: String
+  team: String
+}
+
 type Okr {
   year: String!
   ownedBy: String!
@@ -104,7 +113,7 @@ type Mutation {
   moveItemTo(input: Item!, moveTo: String!): RetroItem
   postObjective(input: Objective!): ObjectiveItem!
   postOkr(year: String!, ownedBy: String!): Okr 
-  signUp(input: User): User
+  signUp(input: SignUp): User
 }
 
 type Subscription {
