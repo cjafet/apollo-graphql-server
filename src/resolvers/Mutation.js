@@ -14,7 +14,7 @@ module.exports = {
   signUp(parent, args, { db }) {
     console.log(args);
     var user = {
-      ...args.user,
+      ...args.input,
     };
     db.collection("users").insertOne(user);
     // generate and send otp

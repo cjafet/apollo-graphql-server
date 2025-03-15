@@ -104,7 +104,7 @@ type Mutation {
   moveItemTo(input: Item!, moveTo: String!): RetroItem
   postObjective(input: Objective!): ObjectiveItem!
   postOkr(year: String!, ownedBy: String!): Okr 
-  signUp(user: User): User
+  signUp(input: User): User
 }
 
 type Subscription {
