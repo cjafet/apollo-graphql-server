@@ -11,6 +11,15 @@ module.exports = {
     db.collection("retro").insertOne(retrospective);
     return retrospective;
   },
+  signUp(parent, args, { db }) {
+    console.log(args);
+    var user = {
+      ...args.user,
+    };
+    db.collection("users").insertOne(user);
+    // generate and send otp
+    return user;
+  },
   postItem(parent, args, { db, pubsub }) {
     console.log(args);
     let obj = {};
