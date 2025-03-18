@@ -32,7 +32,7 @@ module.exports = {
       { $push: newTeam }
     );
 
-    return args.input;
+    return args.teamName;
   },
   postItem(parent, args, { db, pubsub }) {
     console.log(args);
