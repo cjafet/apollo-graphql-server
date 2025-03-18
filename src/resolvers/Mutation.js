@@ -20,6 +20,20 @@ module.exports = {
     // generate and send otp
     return user;
   },
+  addTeam(parent, args, { db, pubsub }) {
+    console.log(args);
+    const newTeam = args.teamName;
+    const organization = args.organization;
+    console.log(newTeam, organization);
+    db.collection("users").findOneAndUpdate(
+      {
+        "organization": organization
+      },
+      { $push: newTeam }
+    );
+
+    return args.input;
+  },
   postItem(parent, args, { db, pubsub }) {
     console.log(args);
     let obj = {};

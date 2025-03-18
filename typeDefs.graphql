@@ -110,6 +110,7 @@ type Mutation {
   postObjective(input: Objective!): ObjectiveItem!
   postOkr(year: String!, ownedBy: String!): Okr 
   signUp(input: SignUp!): User
+  addTeam(teamName: String!, organization: String!): String
 }
 
 type Subscription {
