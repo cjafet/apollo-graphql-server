@@ -25,11 +25,13 @@ module.exports = {
     const newTeam = args.teamName;
     const organization = args.organization;
     console.log(newTeam, organization);
+    let obj = {};
+    obj.team = newTeam
     db.collection("users").findOneAndUpdate(
       {
         "organization": organization
       },
-      { $push: newTeam }
+      { $push: obj }
     );
 
     return args.teamName;
