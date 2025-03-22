@@ -38,6 +38,7 @@ input SignUp {
   password: String!
   name: String
   team: String
+  hash: String
 }
 
 type Okr {

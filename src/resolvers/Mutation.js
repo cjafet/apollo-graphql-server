@@ -52,7 +52,7 @@ module.exports = {
     db.collection("users").findOneAndUpdate(
       {
         "team.name": team,
-        // "team.hash": hash
+        "team.hash": hash
       },
       { $push: { "team.$.users": user } }
     );
