@@ -49,9 +49,7 @@ module.exports = {
     };
 
     let obj = {
-      team: {
-        users: [user]
-      }
+      team: user
     };
     
     db.collection("users").findOneAndUpdate(
