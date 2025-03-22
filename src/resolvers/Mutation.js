@@ -37,6 +37,7 @@ module.exports = {
   },
   userSignUp(parent, args, { db }) {
     console.log(args);
+    const hash = args.input.hash;
     const team = args.input.team;
     const name = args.input.name;
     const email = args.input.email;
@@ -50,7 +51,8 @@ module.exports = {
     
     db.collection("users").findOneAndUpdate(
       {
-        "team.name": team
+        "team.name": team,
+        // "team.hash": hash
       },
       { $push: { "team.$.users": user } }
     );
@@ -63,7 +65,9 @@ module.exports = {
     const organization = args.organization;
     console.log(newTeam, organization);
     let obj = {};
-    obj.team = newTeam
+    obj.name = newTeam
+    obj.users = {}
+    obj.hash = uuidv4();
     db.collection("users").findOneAndUpdate(
       {
         "organization": organization
