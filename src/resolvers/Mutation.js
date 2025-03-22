@@ -13,10 +13,50 @@ module.exports = {
   },
   signUp(parent, args, { db }) {
     console.log(args);
-    var user = {
-      ...args.input,
+    const email = args.input.email;
+    const organization = args.input.organization;
+    const userName = args.input.userName;
+    const password = args.input.password;
+    const newTeam = {};
+    newTeam.name = args.input.team;
+    newTeam.users = [];
+    newTeam.hash = uuidv4();
+    const team = [newTeam];
+
+    let user = {
+      email,
+      organization,
+      userName,
+      password,
+      team
     };
+
     db.collection("users").insertOne(user);
+    // generate and send otp
+    return user;
+  },
+    userSignUp(parent, args, { db }) {
+    console.log(args);
+    const team = args.input.team;
+    const name = args.input.name;
+    const email = args.input.email;
+    const password = args.input.password;
+
+    let user = {
+      name,
+      email,
+      password,
+    };
+
+    let obj = {};
+    obj.team.users = [user];
+    
+    db.collection("users").findOneAndUpdate(
+      {
+        "team.name": team
+      },
+      { $push: obj }
+    );
     // generate and send otp
     return user;
   },
