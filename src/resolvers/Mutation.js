@@ -35,7 +35,7 @@ module.exports = {
     // generate and send otp
     return user;
   },
-    userSignUp(parent, args, { db }) {
+  userSignUp(parent, args, { db }) {
     console.log(args);
     const team = args.input.team;
     const name = args.input.name;
