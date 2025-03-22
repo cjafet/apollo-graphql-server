@@ -12,6 +12,16 @@ module.exports = {
     
     retroByIterationAndTeam: (parent, args, { db }) => db.collection('retro').findOne({ 'ownedBy.productTeam': args.productTeam, 'iteration': args.iteration }),
     
-    user: (parent, args, { db }) => db.collection('users').findOne({ 'userName': args.userName, 'password': args.password }) 
+    user: (parent, args, { db }) => db.collection('users').findOne({ 'userName': args.userName, 'password': args.password }), 
+    
+    userSignIn: (parent, args, { db }) => db.collection('users').findOne({
+      "organization": args.organization,
+      "team.users": {
+        $elemMatch: {
+          "email": args.email,
+          "pwd": args.password
+        }
+      }
+    }), 
 
 }

@@ -100,6 +100,7 @@ type Query {
   allTeams: [String]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
   user(userName: String!, password: String!): User
+  userSignIn(userName: String!, password: String!, organization: String!, team: String!): User
 }
 
 type Mutation {
