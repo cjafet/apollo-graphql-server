@@ -48,8 +48,11 @@ module.exports = {
       password,
     };
 
-    let obj = {};
-    obj.team.users = [user];
+    let obj = {
+      team: [{
+        users: [user]
+      }]
+    };
     
     db.collection("users").findOneAndUpdate(
       {
