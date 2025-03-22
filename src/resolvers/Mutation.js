@@ -47,16 +47,12 @@ module.exports = {
       email,
       password,
     };
-
-    let obj = {
-      team: user
-    };
     
     db.collection("users").findOneAndUpdate(
       {
         "team.name": team
       },
-      { $push: obj }
+      { $push: { "team.$.users": user } }
     );
     // generate and send otp
     return user;
