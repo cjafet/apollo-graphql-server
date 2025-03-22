@@ -64,10 +64,15 @@ module.exports = {
     const newTeam = args.teamName;
     const organization = args.organization;
     console.log(newTeam, organization);
+    
+    let team = {
+      name: newTeam,
+      users: [],
+      hash: uuidv4()
+    }
     let obj = {};
-    obj.name = newTeam
-    obj.users = {}
-    obj.hash = uuidv4();
+    obj.team = team
+
     db.collection("users").findOneAndUpdate(
       {
         "organization": organization
