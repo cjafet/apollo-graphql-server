@@ -16,7 +16,8 @@ module.exports = {
     
     userSignIn: (parent, args, { db }) => db.collection('users').findOne({
       "organization": args.organization,
-      "team.users": {
+      "team.name": args.team,
+      "team.$.users": {
         $elemMatch: {
           "email": args.email,
           "pwd": args.password
