@@ -34,7 +34,7 @@ input Objective {
 input SignUp {
   email: String!
   organization: String
-  userName: String!
+  userName: String
   password: String!
   name: String
   team: String
