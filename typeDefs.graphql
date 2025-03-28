@@ -93,6 +93,21 @@ type User {
   team: String
 }
 
+type Team {
+  name: String
+  users: [Users]
+}
+
+type Users {
+  name: String
+  email: String
+}
+
+type LoggedUser {
+  organization: String
+  team: [Team]
+}
+
 type Query {
   totalRetros: Int!
   retrospectives: [Retros]
@@ -100,7 +115,7 @@ type Query {
   allTeams: [String]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
   user(userName: String!, password: String!): User
-  userSignIn(userName: String!, password: String!, organization: String!, team: String!): User
+  userSignIn(userName: String!, password: String!, organization: String!, team: String!): LoggedUser
 }
 
 type Mutation {
