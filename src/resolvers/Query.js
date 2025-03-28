@@ -16,9 +16,9 @@ module.exports = {
     
     userSignIn: (parent, args, { db }) => db.collection('users').findOne({
       "organization": args.organization,
-      "team.name": args.team,
-      "team.users.email": args.email,
-      "team.users.password": args.password
+      "team.$.name": args.team,
+      "team.$.users.$.email": args.email,
+      "team.$.users.$.password": args.password
     }), 
 
 }
