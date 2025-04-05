@@ -26,21 +26,24 @@ module.exports = {
         }]
       };
       let res = await db.collection('users').findOne({
-      "organization": args.organization,
-      "team.name": args.team,
-      "team.users.email": args.userName,
-      "team.users.password": args.password
+        "organization": args.organization,
+        "team.name": args.team,
+        "team.users.email": args.userName,
+        "team.users.password": args.password
       });
       console.log(res);
-      let team = res.team.filter(t => t.name === args.team);
-      console.log(team);
-      console.log(team[0].users);
-      obj.organization = res.organization;
-      obj.team[0].name = team[0].name;
-      obj.team[0].users[0].name = team[0].users[0].name;
-      obj.team[0].users[0].email = team[0].users[0].email;
-      
+      if (bcrypt.compareSync(args.password, res.password)) {
+        let team = res.team.filter(t => t.name === args.team);
+        console.log(team);
+        console.log(team[0].users);
+        obj.organization = res.organization;
+        obj.team[0].name = team[0].name;
+        obj.team[0].users[0].name = team[0].users[0].name;
+        obj.team[0].users[0].email = team[0].users[0].email;
+      } 
+
       return obj;
+      
     }, 
 
 }
