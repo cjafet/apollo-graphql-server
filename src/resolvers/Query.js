@@ -32,7 +32,7 @@ module.exports = {
         // "team.users.password": args.password
       });
       console.log(res);
-      let team = res.team.filter(t => t.name === args.team);
+      let team = res.team.filter(t => t.name === args.organization);
       console.log(team);
       console.log(team[0].users);
       console.log(team[0].users.password);
