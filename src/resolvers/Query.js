@@ -28,8 +28,8 @@ module.exports = {
       let res = await db.collection('users').findOne({
         "organization": args.organization,
         "team.name": args.team,
-        "team.users.email": args.userName,
-        "team.users.password": args.password
+        "team.users.email": args.userName
+        // "team.users.password": args.password
       });
       console.log(res);
       if (bcrypt.compareSync(args.password, res.password)) {
