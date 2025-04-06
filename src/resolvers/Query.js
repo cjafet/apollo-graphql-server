@@ -27,7 +27,7 @@ module.exports = {
       };
       let res = await db.collection('users').findOne({
         // "organization": args.organization,
-        "team.name": args.team,
+        "team.name": args.organization,
         "team.users.email": args.userName
         // "team.users.password": args.password
       });
