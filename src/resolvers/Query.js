@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 const { ObjectID } = require('mongodb')
 
 module.exports = {
@@ -38,12 +39,11 @@ module.exports = {
       console.log("logged user", user);
       let isValid = bcrypt.compareSync(args.password, user[0].password);
       console.log(isValid, args.password, user[0].password);
-       
       if (isValid) {
         obj.organization = res.organization;
         obj.team[0].name = team[0].name;
-        obj.team[0].users[0].name = team[0].users[0].name;
-        obj.team[0].users[0].email = team[0].users[0].email;
+        obj.team[0].users[0].name = user[0].name;
+        obj.team[0].users[0].email = user[0].email;
       } 
 
       return obj;
