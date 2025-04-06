@@ -18,22 +18,22 @@ module.exports = {
     userSignIn: async (parent, args, { db }) => {
       let obj = {
         organization: "",
-        team: [{
+        team: {
           name: "",
-          users: [{
+          users: {
             name: "",
             email: ""
-          }]
-        }]
+          }
+        }
       };
       let res = await db.collection('users').findOne({
-        // "organization": args.organization,
-        "team.name": args.organization,
+        "organization": args.organization,
+        "team.name": args.team,
         "team.users.email": args.userName
         // "team.users.password": args.password
       });
       console.log(res);
-      let team = res.team.filter(t => t.name === args.organization);
+      let team = res.team.filter(t => t.name === args.team);
       console.log(team);
       let user = team[0].users.filter(u => u.email === args.userName);
       console.log("logged user", user);
@@ -41,9 +41,9 @@ module.exports = {
       console.log(isValid, args.password, user[0].password);
       if (isValid) {
         obj.organization = res.organization;
-        obj.team[0].name = team[0].name;
-        obj.team[0].users[0].name = user[0].name;
-        obj.team[0].users[0].email = user[0].email;
+        obj.team.name = team[0].name;
+        obj.team.users.name = user[0].name;
+        obj.team.users.email = user[0].email;
       } 
 
       return obj;
