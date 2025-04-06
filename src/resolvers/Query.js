@@ -32,7 +32,7 @@ module.exports = {
         // "team.users.password": args.password
       });
       console.log(res);
-      if (bcrypt.compareSync(args.password, res.password)) {
+      if (bcrypt.compareSync(args.password, res.team.users.password)) {
         let team = res.team.filter(t => t.name === args.team);
         console.log(team);
         console.log(team[0].users);
