@@ -95,7 +95,7 @@ type User {
 
 type Team {
   name: String
-  users: [Users]
+  users: Users
 }
 
 type Users {
@@ -105,7 +105,7 @@ type Users {
 
 type LoggedUser {
   organization: String
-  team: [Team]
+  team: Team
 }
 
 type Query {
