@@ -13,6 +13,8 @@ module.exports = {
 
       let res = await db.collection('users').findOne({'organization': args.org });
       console.log(res);
+
+      return res.team;
       
     },
     

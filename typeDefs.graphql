@@ -96,6 +96,7 @@ type User {
 type Team {
   name: String
   users: Users
+  hash: String
 }
 
 type Users {
@@ -113,7 +114,7 @@ type Query {
   retrospectives: [Retros]
   allRetrosByTeam(productTeam: String!): [Retros]
   allTeams: [String]
-  allTeamsByOrg(org: String): [String]
+  allTeamsByOrg(org: String): [Team]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
   user(userName: String!, password: String!): User
   userSignIn(userName: String!, password: String!, team: String!): LoggedUser
