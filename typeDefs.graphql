@@ -113,6 +113,7 @@ type Query {
   retrospectives: [Retros]
   allRetrosByTeam(productTeam: String!): [Retros]
   allTeams: [String]
+  allTeamsByOrg(org: String): [String]
   retroByIterationAndTeam(productTeam: String!, iteration: Int!): Retros
   user(userName: String!, password: String!): User
   userSignIn(userName: String!, password: String!, team: String!): LoggedUser

@@ -8,6 +8,8 @@ module.exports = {
     retrospectives: (parent, args, { db }) => db.collection('retro').find().toArray(),
 
     allTeams: (parent, args, { db }) => db.collection('retro').distinct('ownedBy.productTeam'),
+
+    allTeamsByOrg: (parent, args, { db }) => db.collection('users').find({ 'organization': args.org }).toArray(),
     
     allRetrosByTeam: (parent, args, { db }) => db.collection('retro').find({ 'ownedBy.productTeam': args.productTeam }).toArray(), 
     
