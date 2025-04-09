@@ -9,7 +9,7 @@ module.exports = {
 
     allTeams: (parent, args, { db }) => db.collection('retro').distinct('ownedBy.productTeam'),
 
-    allTeamsByOrg: (parent, args, { db }) => db.collection('users').findOne({ 'organization': args.org }).toArray(),
+    allTeamsByOrg: (parent, args, { db }) => db.collection('users').findOne({ 'organization': args.org }),
     
     allRetrosByTeam: (parent, args, { db }) => db.collection('retro').find({ 'ownedBy.productTeam': args.productTeam }).toArray(), 
     
