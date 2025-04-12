@@ -72,6 +72,13 @@ type RetroItem {
   action: String
 }
 
+type Moods {
+  happy: Int
+  tired: Int
+  sad: Int
+  angry: Int
+}
+
 type Retros {
   _id: ID!
   labels: [String]
@@ -81,6 +88,7 @@ type Retros {
   lastActionItems: [RetroItem]
   ownedBy: Team
   iteration: Int!
+  moods: [Moods]
 }
 
 type User {
@@ -125,6 +133,7 @@ type Mutation {
   postItem(input: Item!): RetroItem
   deleteItem(_id: ID!, itemId: ID!, desc: String!, type: String!): String
   addItemLike(_id: ID!, itemId: ID!, desc: String!, type: String!): String
+  addTodayMood(_id: ID!, iteration: Int!, key: String!): String
   moveItemTo(input: Item!, moveTo: String!): RetroItem
   postObjective(input: Objective!): ObjectiveItem!
   postOkr(year: String!, ownedBy: String!): Okr 

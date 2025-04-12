@@ -161,6 +161,23 @@ module.exports = {
 
     return args.desc;
   },
+  addTodayMood(parent, args, { db }) {
+    console.log(args);
+    const iteration = args.iteration;
+    const key = args.key;
+    console.log(iteration, key);
+    const _mood = `mood[0].$key`;
+
+    db.collection("retro").findOneAndUpdate(
+      {
+        _id: new ObjectId(args._id),
+        iteration: iteration,
+      },
+      { $inc: { [_mood]: 1 } }
+    );
+
+    return args.desc;
+  },
   moveItemTo(parent, args, { db }) {
     console.log(args);
     const itemId = args.input.itemId;
