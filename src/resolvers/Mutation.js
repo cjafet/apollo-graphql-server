@@ -166,7 +166,9 @@ module.exports = {
     const iteration = args.iteration;
     const key = args.key;
     console.log(iteration, key);
-    const _moods = `moods[${key}]`;
+    const moods = `moods.${key}`;
+    console.log(moods);
+    
 
     // Await for response
     db.collection("retro").findOneAndUpdate(
@@ -174,7 +176,7 @@ module.exports = {
         _id: new ObjectId(args._id),
         iteration: iteration,
       },
-      { $inc: { _moods: 1 } }
+      { $inc: { [moods]: 1 } }
     );
 
     return JSON.stringify({ iteration, key, status: `Added 1 to ${_moods}`});
