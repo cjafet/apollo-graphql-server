@@ -166,7 +166,7 @@ module.exports = {
     const iteration = args.iteration;
     const key = args.key;
     console.log(iteration, key);
-    const _mood = `moods[0].$key`;
+    const _mood = `moods.$key`;
 
     db.collection("retro").findOneAndUpdate(
       {
@@ -176,7 +176,7 @@ module.exports = {
       { $inc: { [_mood]: 1 } }
     );
 
-    return args.desc;
+    return { iteration, key, status: `Added 1 to ${_mood}`}
   },
   moveItemTo(parent, args, { db }) {
     console.log(args);
