@@ -166,7 +166,7 @@ module.exports = {
     const iteration = args.iteration;
     const key = args.key;
     console.log(iteration, key);
-    const _mood = `moods.$key`;
+    const _mood = `moods[$key]`;
 
     // Await for response
     db.collection("retro").findOneAndUpdate(
