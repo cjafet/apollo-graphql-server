@@ -28,7 +28,7 @@ module.exports = {
       password,
     };
     newTeam.users.push(zeroUser);
-    const team = [newTeam];
+    let team = [newTeam];
 
     let user = {
       email,
@@ -40,6 +40,7 @@ module.exports = {
 
     db.collection("users").insertOne(user);
     // generate and send otp
+    user.team = args.input.team;
     return user;
   },
   userSignUp(parent, args, { db }) {
