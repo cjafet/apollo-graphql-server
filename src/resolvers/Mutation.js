@@ -18,9 +18,16 @@ module.exports = {
     const userName = args.input.userName;
     const password = args.input.password;
     const newTeam = {};
+
     newTeam.name = args.input.team;
     newTeam.users = [];
     newTeam.hash = uuidv4();
+    let zeroUser =  {
+      name: "",
+      email: userName,
+      password,
+    };
+    newTeam.users.push(zeroUser);
     const team = [newTeam];
 
     let user = {
