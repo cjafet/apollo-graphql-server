@@ -36,9 +36,9 @@ module.exports = {
     let user = {
       email,
       organization,
-      userName,
-      password,
-      team
+      team,
+      planType,
+      createdDate
     };
 
     await db.collection("users").insertOne(user);
