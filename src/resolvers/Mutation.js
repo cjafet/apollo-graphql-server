@@ -37,7 +37,6 @@ module.exports = {
       email,
       organization,
       team,
-      userName,
       planType: "TRIAL",
       createdDate: new Date().toISOString().split("T")[0]
     };
@@ -45,6 +44,7 @@ module.exports = {
     await db.collection("users").insertOne(user);
     // generate and send otp
     user.team = args.input.team;
+    user.userName = userName;
     return user;
   },
   userSignUp(parent, args, { db }) {
