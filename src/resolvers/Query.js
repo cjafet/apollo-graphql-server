@@ -38,7 +38,7 @@ module.exports = {
       };
       let res = await db.collection('users').findOne({
         "team.name": args.team,
-        "team.users.userName": args.userName
+        "team.users.email": args.userName
       });
       console.log(res);
       let team = res.team.filter(t => t.name === args.team);
@@ -50,7 +50,7 @@ module.exports = {
         obj.team.name = team[0].name;
         obj.team.users.name = user[0].name;
         obj.team.users.email = user[0].email;
-        obj.team.users.userName = user[0].userName;
+        obj.team.users.userName = user[0].userName; // missing in sign up
       } 
 
       return obj;
