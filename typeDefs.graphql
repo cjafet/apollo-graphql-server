@@ -48,7 +48,7 @@ input SignUp {
   name: String
   team: String
   planType: String
-  createdDate: Date
+  createdDate: String
   hash: String
 }
 
