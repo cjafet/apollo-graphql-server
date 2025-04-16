@@ -17,8 +17,6 @@ module.exports = {
     const organization = args.input.organization;
     const userName = args.input.userName;
     const password = args.input.password;
-    const planType = args.input.planType;
-    const createdDate = args.input.createdDate;
     const newTeam = {};
 
     newTeam.name = args.input.team;
@@ -37,8 +35,8 @@ module.exports = {
       email,
       organization,
       team,
-      planType,
-      createdDate
+      planType: "TRIAL",
+      createdDate: new Date().toISOString().split("T")[0]
     };
 
     await db.collection("users").insertOne(user);
