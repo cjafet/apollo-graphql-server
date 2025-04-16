@@ -105,11 +105,10 @@ type Retros {
 
 type User {
   _id: ID!
-  name: String!
+  name: String
   email: String!
   organization: String
   userName: String!
-  name: String
   team: String
 }
 
