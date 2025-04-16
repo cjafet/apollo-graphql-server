@@ -43,7 +43,7 @@ module.exports = {
       console.log(res);
       let team = res.team.filter(t => t.name === args.team);
       console.log(team);
-      let user = team[0].users.filter(u => u.userName === args.userName);
+      let user = team[0].users.filter(u => u.email === args.email);
       console.log("logged user", user);
       if (bcrypt.compareSync(args.password, user[0].password)) {
         obj.organization = res.organization;
