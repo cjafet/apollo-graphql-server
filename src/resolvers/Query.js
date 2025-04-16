@@ -38,19 +38,19 @@ module.exports = {
       };
       let res = await db.collection('users').findOne({
         "team.name": args.team,
-        "team.users.email": args.userName
+        "team.users.userName": args.userName
       });
       console.log(res);
       let team = res.team.filter(t => t.name === args.team);
       console.log(team);
-      let user = team[0].users.filter(u => u.email === args.userName);
+      let user = team[0].users.filter(u => u.userName === args.userName);
       console.log("logged user", user);
       if (bcrypt.compareSync(args.password, user[0].password)) {
         obj.organization = res.organization;
         obj.team.name = team[0].name;
         obj.team.users.name = user[0].name;
         obj.team.users.email = user[0].email;
-        obj.team.users.userName = user[0].userName; // missing in sign up
+        obj.team.users.userName = user[0].userName;
       } 
 
       return obj;
