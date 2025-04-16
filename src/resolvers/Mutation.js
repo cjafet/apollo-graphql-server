@@ -13,6 +13,7 @@ module.exports = {
   },
   async signUp(parent, args, { db }) {
     console.log(args);
+    const name = args.input.name;
     const email = args.input.email;
     const organization = args.input.organization;
     const userName = args.input.userName;
@@ -23,8 +24,9 @@ module.exports = {
     newTeam.users = [];
     newTeam.hash = uuidv4();
     let zeroUser =  {
-      name: "",
-      email: userName,
+      name,
+      email, 
+      userName,
       password,
       role: "ADMIN"
     };
@@ -35,6 +37,7 @@ module.exports = {
       email,
       organization,
       team,
+      userName,
       planType: "TRIAL",
       createdDate: new Date().toISOString().split("T")[0]
     };

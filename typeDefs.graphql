@@ -41,6 +41,7 @@ input Objective {
 }
 
 input SignUp {
+  name: String!
   email: String!
   organization: String
   userName: String
@@ -105,10 +106,10 @@ type Retros {
 
 type User {
   _id: ID!
+  name: String!
   email: String!
   organization: String
   userName: String!
-  password: String!
   name: String
   team: String
 }
@@ -122,6 +123,7 @@ type Team {
 type Users {
   name: String
   email: String
+  userName: String
   role: String
 }
 
