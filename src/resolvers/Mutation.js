@@ -53,11 +53,13 @@ module.exports = {
     const team = args.input.team;
     const name = args.input.name;
     const email = args.input.email;
+    const userName = args.input.userName;
     const password = args.input.password;
 
     let user = {
       name,
       email,
+      userName,
       password,
       role: "USER"
     };
