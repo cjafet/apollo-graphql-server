@@ -11,7 +11,7 @@ module.exports = {
     db.collection("retro").insertOne(retrospective);
     return retrospective;
   },
-  signUp(parent, args, { db }) {
+  async signUp(parent, args, { db }) {
     console.log(args);
     const email = args.input.email;
     const organization = args.input.organization;
@@ -38,7 +38,7 @@ module.exports = {
       team
     };
 
-    db.collection("users").insertOne(user);
+    await db.collection("users").insertOne(user);
     // generate and send otp
     user.team = args.input.team;
     return user;
