@@ -47,6 +47,8 @@ input SignUp {
   password: String!
   name: String
   team: String
+  planType: String
+  createdDate: Date
   hash: String
 }
 
@@ -120,6 +122,7 @@ type Team {
 type Users {
   name: String
   email: String
+  role: String
 }
 
 type LoggedUser {
