@@ -46,7 +46,6 @@ input SignUp {
   organization: String
   userName: String
   password: String!
-  name: String
   team: String
   planType: String
   createdDate: String
